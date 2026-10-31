@@ -128,7 +128,14 @@ tests/                  가짜 데이터 생성, 스모크 테스트
 ### 작업 규칙
 - 작업마다 브랜치를 만들고 PR로 합친다. 예: `feat/confusion-analysis`
 - PR 전에 `bash tests/smoke_test.sh` 가 통과하는지 확인한다.
-- 분할 파일(`data/splits/`)은 seed가 같으면 누가 만들어도 같다. 설정의 `split.seed` 는 바꾸지 않는다.
+- **결과 공유:** 실험이 끝나면 `results/` 안의 json(과 그림)을 커밋해서 올린다. 각자 다른 실험 폴더(`results/xgb*/`, `results/tf_*/`)에 쓰니까 충돌하지 않는다. `results/summary.md` 는 올리지 않고 각자 `05_summarize.py` 로 만든다.
+- 분할 파일(`data/splits/`)은 같은 데이터·같은 seed면 누가 만들어도 같다.
+
+### 전처리 설정을 바꿔도 결과가 섞이지 않게 해 뒀다
+- 결과 파일마다 **전처리 버전**(`_v1a2b3c4d.json`)이 붙는다. `data:` 와 `split:` 설정으로 계산한 값이라, 설정이 같으면 버전도 같다.
+- `05_summarize.py` 는 버전별로 따로 묶고, 기본으로 **현재 설정 버전**만 보여준다(`--all` 로 전부). 예전 결과를 지울 필요 없다.
+- 캐시를 만들 때 쓰는 설정(`up_axis`, `up_sign`, `fps`, `src_fps`, `keypoints_key`)을 바꾸고 캐시를 다시 안 만들면, 실행이 멈추고 다시 만들라는 메시지가 나온다.
+- 전처리를 바꿨다면 **상대방에게 알리기**. 비교하려면 XGBoost와 Transformer 둘 다 같은 버전으로 다시 돌려야 한다.
 
 ---
 

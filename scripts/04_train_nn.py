@@ -14,7 +14,7 @@ import _bootstrap  # noqa: F401
 from dgc.config import load_config, resolve
 from dgc.data.preprocess import load_cache
 from dgc.data.splits import load_splits
-from dgc.train.common import parse_repeats, result_path, save_result
+from dgc.train.common import parse_repeats, prep_settings, prep_version, result_path, save_result
 from dgc.train.nn import run_nn
 
 ap = argparse.ArgumentParser()
@@ -30,13 +30,14 @@ cfg = load_config(args.exp, args.set)
 exp = args.exp + (f"_{args.tag}" if args.tag else "")
 cfg["exp_name"] = exp
 cache = load_cache(cfg)
-splits = load_splits(resolve(cfg["paths"]["splits_dir"]) / f"{args.setting}.json")
+splits = load_splits(resolve(cfg["paths"]["splits_dir"]) / f"{args.setting}.json", cfg, cache)
 seeds = [int(s) for s in args.seeds.split(",")] if args.seeds else cfg["nn"]["seeds"]
 for r in parse_repeats(args.repeats, len(splits)):
     for seed in seeds:
         print(f"=== {exp} {args.setting} rep{r} seed{seed} ===")
         res = run_nn(cfg, cache, splits[r], seed=seed)
-        res.update({"exp": exp, "setting": args.setting, "repeat": r, "config": cfg})
+        res.update({"exp": exp, "setting": args.setting, "repeat": r, "config": cfg,
+                    "prep_version": prep_version(cfg), "prep_settings": prep_settings(cfg)})
         p = result_path(cfg, exp, args.setting, r, seed)
         save_result(p, res)
         pr = res["probe"]["probe_acc"]

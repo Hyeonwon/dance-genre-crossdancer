@@ -5,10 +5,11 @@ venv/
 .ipynb_checkpoints/
 .DS_Store
 
-# 데이터와 결과는 레포에 올리지 않는다 (각자 로컬에서 생성)
+# 데이터는 레포에 올리지 않는다 (각자 로컬에서 생성)
 data/
-results/
 results_fake/
+# 결과 json·그림은 레포에 올려서 공유한다. 요약은 각자 생성.
+results/summary.md
 wandb/
 *.pkl
 *.pt

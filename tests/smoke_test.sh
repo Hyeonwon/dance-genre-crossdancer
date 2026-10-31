@@ -4,11 +4,11 @@
 set -e
 cd "$(dirname "$0")/.."
 python tests/make_fake_aist.py --out data/fake_aist
-S="paths.anno_dir=data/fake_aist paths.cache=data/cache/fake.pkl paths.splits_dir=data/splits_fake paths.results_dir=results_fake"
+S="paths.anno_dir=data/fake_aist paths.cache=data/cache/fake.pkl paths.splits_dir=data/splits_fake paths.results_dir=results_fake split.n_repeats=2"
 FAST="nn.max_epochs=3 nn.d_model=32 nn.n_layers=1 nn.ff_dim=64 nn.stats_windows=300 xgb.n_estimators=50 xgb.max_depth_grid=[3]"
 python scripts/00_inspect_data.py --set $S --limit 30
 python scripts/01_build_cache.py --set $S
-python scripts/02_make_splits.py --set $S split.n_repeats=2
+python scripts/02_make_splits.py --set $S
 for st in cross seen; do
   python scripts/03_train_xgb.py --setting $st --repeats 0 --set $S $FAST
   python scripts/04_train_nn.py --exp tf_aug_adv --setting $st --repeats 0 --seeds 0 --set $S $FAST
