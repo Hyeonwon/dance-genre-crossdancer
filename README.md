@@ -92,15 +92,16 @@ tests/                  가짜 데이터 생성, 스모크 테스트
 
 두 사람의 기여도가 같아야 하니까, 각자 "자기 결과"가 남는 단위로 나눈다.
 
-| 담당 | 작업 | 산출물 |
+2인 팀이라 **"XGBoost·해석 라인"(팀원)** 과 **"Transformer·제안 방법 라인"(형원)** 으로 나눈다. 각자 실험부터 그림까지 자기 라인을 끝까지 책임진다.
+
+| 단계 | 형원 | 팀원 |
 |---|---|---|
-| 형원 | 레포·파이프라인 세팅 (완료) | 이 레포 |
-| 형원 | 3단계: Transformer 계열 실험, 적대 학습 튜닝 (`adv.weight`, `adv.lr_mult`, 증강 강도) | `results/tf_*`, 튜닝 기록 |
-| 팀원 | 0~1단계: 실제 데이터로 `00_inspect_data.py` 실행, 보고서 공유, 이상 있으면 설정 수정 | `results/data_report.md` |
-| 팀원 | 2단계: XGBoost 실험 전체 (cross/seen 10회 + 부위 제거 3종) | `results/xgb*` |
-| 팀원 | 4단계 해석: `06_shap_xgb.py`, `07_confusion_analysis.py` 구현 | `results/analysis/` 그림·표 |
-| 팀원 | 확장: FineDance 로더 (`src/dgc/data/finedance.py`) | 외부 검증 결과 |
-| 같이 | 결과 정리, 발표 자료 | 발표 |
+| 1. 데이터 | 레포·파이프라인 세팅 (완료) | 실제 데이터로 `00_inspect_data.py` 실행, 보고서 공유, 캐시·분할 생성 |
+| 2. 기준선 | — | XGBoost 실험 전체 (cross/seen 10회 + 부위 제거 3종) → **댄서 의존도 첫 확인** |
+| 3. 제안 방법 | Transformer 4종 실험, 적대 학습 튜닝 (`adv.weight`, `adv.lr_mult`, 증강 강도) | — |
+| 4. 해석 | probe(개인 정보량) 분석, 실험별 비교 그림 | `06_shap_xgb.py`, `07_confusion_analysis.py` 구현 |
+| 확장 | FineDance 로더·외부 검증 (SMPL 변환 경험 활용) | — |
+| 발표 | 문제·방법 파트 | 데이터·기준선·해석 파트 |
 
 ### 팀원 첫 할 일 (체크리스트)
 - [ ] 레포 클론, `pip install -r requirements.txt`, `bash tests/smoke_test.sh` 통과
