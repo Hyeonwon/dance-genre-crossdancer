@@ -103,7 +103,9 @@ tests/                  가짜 데이터 생성, 스모크 테스트
 | 확장 | FineDance 외부 검증 | — |
 | 발표 | 발표 (전체) | 발표 자료용 그림·표 준비 |
 
-### 팀원 체크리스트
+> **팀원은 [docs/TEAMMATE_GUIDE.md](docs/TEAMMATE_GUIDE.md) 를 따라 하면 됩니다** (단계별 명령, 완료 기준, 기한).
+
+### 팀원 체크리스트 (요약)
 **1주차 (~11/8): 데이터 확인 + 기준선**
 - [ ] 레포 클론 → `pip install -r requirements.txt` → `bash tests/smoke_test.sh` 가 "스모크 테스트 통과"로 끝나는지 확인
 - [ ] AIST++ annotations 다운로드 → 압축 풀어서 `data/aist_plusplus_final/` 에 두기
