@@ -1,0 +1,5 @@
+# Transformer + 증강(뼈 길이, 좌우 반전, 시간 스케일)만 적용
+aug:
+  enabled: true
+adv:
+  enabled: false

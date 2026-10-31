@@ -1,0 +1,5 @@
+# Transformer + 장르 조건부 적대 학습만 적용 (증강 효과와 분리하기 위한 비교군)
+aug:
+  enabled: false
+adv:
+  enabled: true

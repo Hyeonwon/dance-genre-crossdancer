@@ -1,0 +1,5 @@
+# 제안 방법: Transformer + 증강 + 장르 조건부 적대 학습
+aug:
+  enabled: true
+adv:
+  enabled: true

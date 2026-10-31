@@ -1,0 +1,5 @@
+# 일반 Transformer: 꼼수(댄서 의존)를 보여주는 기준 딥러닝 모델
+aug:
+  enabled: false
+adv:
+  enabled: false
