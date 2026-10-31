@@ -92,28 +92,41 @@ tests/                  가짜 데이터 생성, 스모크 테스트
 
 두 사람의 기여도가 같아야 하니까, 각자 "자기 결과"가 남는 단위로 나눈다.
 
-2인 팀이라 **"XGBoost·해석 라인"(팀원)** 과 **"Transformer·제안 방법 라인"(형원)** 으로 나눈다. 각자 실험부터 그림까지 자기 라인을 끝까지 책임진다.
+형원이 방법 설계·구현·튜닝과 발표를 맡고, 팀원은 **이미 만들어진 스크립트를 실행하고 결과를 정리하는 일** 위주로 맡는다. 팀원 작업도 각자 결과물(보고서, 표, 그림)이 남도록 나눴다.
 
 | 단계 | 형원 | 팀원 |
 |---|---|---|
-| 1. 데이터 | 레포·파이프라인 세팅 (완료) | 실제 데이터로 `00_inspect_data.py` 실행, 보고서 공유, 캐시·분할 생성 |
-| 2. 기준선 | — | XGBoost 실험 전체 (cross/seen 10회 + 부위 제거 3종) → **댄서 의존도 첫 확인** |
-| 3. 제안 방법 | Transformer 4종 실험, 적대 학습 튜닝 (`adv.weight`, `adv.lr_mult`, 증강 강도) | — |
-| 4. 해석 | probe(개인 정보량) 분석, 실험별 비교 그림 | `06_shap_xgb.py`, `07_confusion_analysis.py` 구현 |
-| 확장 | FineDance 로더·외부 검증 (SMPL 변환 경험 활용) | — |
-| 발표 | 문제·방법 파트 | 데이터·기준선·해석 파트 |
+| 1. 데이터 | 레포·파이프라인 세팅 (완료) | 데이터 다운로드, `00`~`02` 실행, 데이터 보고서 공유 |
+| 2. 기준선 | 결과 검토 | XGBoost 실험 실행 (명령만 실행하면 됨, 아래 체크리스트) |
+| 3. 제안 방법 | Transformer 4종 실험, 적대 학습 튜닝 | — |
+| 4. 해석 | probe 분석, SHAP(`06`) | 혼동 행렬 그림·헷갈리는 장르 표(`07`), 결과 표·그래프 정리 |
+| 확장 | FineDance 외부 검증 | — |
+| 발표 | 발표 (전체) | 발표 자료용 그림·표 준비 |
 
-### 팀원 첫 할 일 (체크리스트)
-- [ ] 레포 클론, `pip install -r requirements.txt`, `bash tests/smoke_test.sh` 통과
-- [ ] AIST++ annotations 다운로드 → `data/aist_plusplus_final/`
-- [ ] `python scripts/00_inspect_data.py` 실행 → `results/data_report.md` 내용을 공유
-  - 장르당 댄서가 3명이고, 여러 장르를 춘 댄서가 없는지
-  - 수직축 추정이 설정(`up_axis`, `up_sign`)과 일치하는지
-- [ ] `01_build_cache.py`, `02_make_splits.py` 실행
-- [ ] `python scripts/03_train_xgb.py --setting cross --repeats 0,1,2` 와 `--setting seen` 으로 **댄서 의존도 첫 확인** → 숫자 공유
+### 팀원 체크리스트
+**1주차 (~11/8): 데이터 확인 + 기준선**
+- [ ] 레포 클론 → `pip install -r requirements.txt` → `bash tests/smoke_test.sh` 가 "스모크 테스트 통과"로 끝나는지 확인
+- [ ] AIST++ annotations 다운로드 → 압축 풀어서 `data/aist_plusplus_final/` 에 두기
+- [ ] `python scripts/00_inspect_data.py` → 만들어진 `results/data_report.md` 를 형원에게 공유
+- [ ] `python scripts/01_build_cache.py` → `python scripts/02_make_splits.py`
+- [ ] 아래 명령을 차례로 실행하고, 마지막에 나오는 표를 형원에게 공유
+  ```bash
+  python scripts/03_train_xgb.py --setting cross
+  python scripts/03_train_xgb.py --setting seen
+  python scripts/03_train_xgb.py --setting cross --tag drop_head --set "data.drop_joint_groups=[head]"
+  python scripts/03_train_xgb.py --setting cross --tag drop_arms --set "data.drop_joint_groups=[arms]"
+  python scripts/03_train_xgb.py --setting cross --tag drop_legs --set "data.drop_joint_groups=[legs]"
+  python scripts/05_summarize.py
+  ```
+
+**2~3주차: 그림과 표**
+- [ ] `scripts/07_confusion_analysis.py` 구현 (파일 안에 단계별 가이드 있음. matplotlib로 그림 그리는 수준)
+- [ ] 형원이 Transformer 결과를 올리면 `05_summarize.py` 결과를 발표용 표·막대그래프로 정리
+
+막히면 바로 물어보기. 혼자 30분 넘게 붙잡고 있지 않기.
 
 ### 작업 규칙
-- 작업마다 브랜치를 만들고 PR로 합친다. 예: `feat/shap-analysis`
+- 작업마다 브랜치를 만들고 PR로 합친다. 예: `feat/confusion-analysis`
 - PR 전에 `bash tests/smoke_test.sh` 가 통과하는지 확인한다.
 - 분할 파일(`data/splits/`)은 seed가 같으면 누가 만들어도 같다. 설정의 `split.seed` 는 바꾸지 않는다.
 

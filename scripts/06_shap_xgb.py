@@ -1,4 +1,4 @@
-"""[4단계 · 팀원 작업] XGBoost 특징 해석 (SHAP).
+"""[4단계 · 형원 작업] XGBoost 특징 해석 (SHAP).
 
 목표: 장르별로 어떤 동작 특징이 판단에 중요한지 상위 10개를 뽑고 그림으로 저장한다.
 
@@ -13,4 +13,4 @@
 
 특징 이름은 dgc.features.handcrafted.feature_names(keep) 에 있다.
 """
-raise NotImplementedError("팀원 작업: 위 가이드대로 구현하세요.")
+raise NotImplementedError("형원 작업: 위 가이드대로 구현하세요.")
