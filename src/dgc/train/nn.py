@@ -114,6 +114,7 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
     if adv:   # 판별기가 너무 약하면 인코더가 '쉽게 속이고' 끝나므로, 판별기는 더 빠르게 학습시킨다
         groups.append({"params": adv.parameters(), "lr": n["lr"] * cfg["adv"]["lr_mult"]})
     opt = torch.optim.AdamW(groups, weight_decay=n["weight_decay"])
+    params_all = [p for g in opt.param_groups for p in g["params"]]
     ce = nn.CrossEntropyLoss()
 
     best, best_state, bad, history = -1.0, None, 0, []
@@ -130,7 +131,7 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
             logits, z = model(x)
             loss = ce(logits, y)
             if adv:
-                lam = dann_lambda(step / total, cfg["adv"]["gamma"])
+                lam = cfg["adv"].get("lambda_max", 1.0) * dann_lambda(step / total, cfg["adv"]["gamma"])
                 ok = d >= 0
                 if ok.any():
                     adv_logits = adv(z[ok], y[ok], lam)
@@ -139,6 +140,8 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
                     tot_adv += l_adv.item()
             opt.zero_grad()
             loss.backward()
+            if n.get("grad_clip"):
+                torch.nn.utils.clip_grad_norm_(params_all, n["grad_clip"])
             opt.step()
             tot += loss.item()
             nb += 1
@@ -150,13 +153,18 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
         log(f"  epoch {epoch:3d} loss {tot / max(nb, 1):.4f}"
             + (f" adv {tot_adv / max(nb, 1):.4f}" if adv else "")
             + f" val_f1 {f1:.4f} ({time.time() - t0:.1f}s)")
+        if n.get("selection", "best_val") == "last":
+            # 고정 epoch: 검증셋(학습과 같은 댄서)으로 모델을 고르지 않는다
+            best = max(best, f1)
+            continue
         if f1 > best:
             best, best_state, bad = f1, copy.deepcopy(model.state_dict()), 0
         else:
             bad += 1
             if bad >= n["patience"]:
                 break
-    model.load_state_dict(best_state)
+    if best_state is not None:
+        model.load_state_dict(best_state)
 
     P, Y, _, I, _ = predict(model, dl_te, device)
     test = compute_metrics(P, Y, [ds_te.items[i][0] for i in I], cache, g2i)
