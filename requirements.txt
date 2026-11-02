@@ -2,9 +2,6 @@ numpy>=1.24
 scikit-learn>=1.3
 xgboost>=2.0
 pyyaml>=6.0
-torch>=2.1          # GPU 환경이면 https://pytorch.org 의 설치 명령을 따르세요
-# 해석/확장 단계에서 추가
-# shap
-# matplotlib
-# scipy
-# smplx            # FineDance(SMPL-H) 변환용
+torch>=2.1
+# GPU: see https://pytorch.org for the CUDA install command
+# Analysis / extension (install when needed): shap matplotlib scipy smplx

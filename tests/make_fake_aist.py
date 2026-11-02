@@ -4,6 +4,13 @@
 있어서 seen 설정이 cross 설정보다 쉽게 나오도록 만들어 둔다.
 실행: python tests/make_fake_aist.py --out data/fake_aist
 """
+import sys as _sys
+for _s in (_sys.stdout, _sys.stderr):   # Windows 터미널(cp949)에서 한글·기호 출력 오류 방지
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 import argparse
 import pickle
 from pathlib import Path

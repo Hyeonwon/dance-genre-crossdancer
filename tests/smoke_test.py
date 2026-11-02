@@ -2,6 +2,14 @@
     python tests/smoke_test.py
 마지막에 "스모크 테스트 통과"가 나오면 OK. 중간 숫자는 가짜 데이터라 의미 없음.
 """
+import sys as _sys
+for _s in (_sys.stdout, _sys.stderr):   # Windows 터미널(cp949)에서 한글·기호 출력 오류 방지
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -17,7 +25,7 @@ FAST = ["nn.max_epochs=3", "nn.d_model=32", "nn.n_layers=1", "nn.ff_dim=64", "nn
 def run(*args):
     cmd = [PY, *args]
     print("\n>>>", " ".join(str(a) for a in args), flush=True)
-    r = subprocess.run(cmd, cwd=ROOT)
+    r = subprocess.run(cmd, cwd=ROOT, env={**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"})
     if r.returncode != 0:
         sys.exit(f"\n실패: {' '.join(str(a) for a in args)}  (위 에러 메시지 전체를 공유해 주세요)")
 
