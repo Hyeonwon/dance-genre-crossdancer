@@ -1,0 +1,374 @@
+{
+ "model": "tf_aug_v2",
+ "seed": 0,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 0.9928480204342274,
+ "epochs_run": 18,
+ "test": {
+  "window_acc": 0.7152761728680379,
+  "window_macro_f1": 0.7099614883452652,
+  "seq_acc": 0.8207964601769911,
+  "seq_macro_f1": 0.8126275421121335,
+  "per_genre_f1": {
+   "gBR": 0.9302325581395349,
+   "gPO": 0.46153846153846156,
+   "gLO": 0.9494949494949495,
+   "gWA": 0.8941176470588236,
+   "gMH": 0.7692307692307693,
+   "gLH": 0.7350427350427351,
+   "gHO": 0.968421052631579,
+   "gKR": 0.7948717948717948,
+   "gJS": 0.8148148148148148,
+   "gJB": 0.8085106382978723
+  },
+  "confusion": [
+   [
+    40,
+    0,
+    0,
+    0,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    15,
+    1,
+    6,
+    2,
+    20,
+    0,
+    0,
+    0,
+    3
+   ],
+   [
+    0,
+    0,
+    47,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    38,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    1,
+    1,
+    0,
+    40,
+    4,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    2,
+    43,
+    2,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    46,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    2,
+    3,
+    0,
+    9,
+    2,
+    0,
+    31,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    33,
+    10
+   ],
+   [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    38
+   ]
+  ],
+  "n_test_seqs": 452,
+  "seq_macro_f1_by_situation": {
+   "sBM": 0.8060782331804204,
+   "sFM": 0.8381979458450047
+  }
+ },
+ "probe": {
+  "probe_acc": 0.8079176836626061,
+  "probe_chance": 0.5,
+  "per_genre": {
+   "0": 0.7169811320754716,
+   "1": 0.8981481481481481,
+   "2": 0.8275862068965517,
+   "3": 0.8027210884353742,
+   "4": 0.8207547169811321,
+   "5": 0.751131221719457,
+   "6": 0.9222222222222223,
+   "7": 0.8205128205128205,
+   "8": 0.7355371900826446,
+   "9": 0.7835820895522388
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 0.8930634411672751,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.8482909926987888
+  },
+  {
+   "epoch": 1,
+   "loss": 0.4005800212423007,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9024456259689526
+  },
+  {
+   "epoch": 2,
+   "loss": 0.27538006342947485,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.963462591048798
+  },
+  {
+   "epoch": 3,
+   "loss": 0.23114875505367916,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9634782933870809
+  },
+  {
+   "epoch": 4,
+   "loss": 0.1957165653196474,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9557520385106594
+  },
+  {
+   "epoch": 5,
+   "loss": 0.16715076062828302,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9614792603698152
+  },
+  {
+   "epoch": 6,
+   "loss": 0.1609322451831152,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9563718299580369
+  },
+  {
+   "epoch": 7,
+   "loss": 0.14700811700895428,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 8,
+   "loss": 0.1390393776508669,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9782591610177818
+  },
+  {
+   "epoch": 9,
+   "loss": 0.1199567079078406,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9773997445721584
+  },
+  {
+   "epoch": 10,
+   "loss": 0.10771631036574641,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856410256410257
+  },
+  {
+   "epoch": 11,
+   "loss": 0.11134074178213875,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 12,
+   "loss": 0.10490433861656735,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 13,
+   "loss": 0.09758451792489116,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 14,
+   "loss": 0.09618566632270813,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 15,
+   "loss": 0.08315817011753097,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9785531837255975
+  },
+  {
+   "epoch": 16,
+   "loss": 0.08481511975405738,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9623627075351212
+  },
+  {
+   "epoch": 17,
+   "loss": 0.08509364514611661,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9787739463601532
+  }
+ ],
+ "n_train_windows": 7718,
+ "n_test_windows": 4327,
+ "exp": "tf_aug_v2",
+ "setting": "cross",
+ "repeat": 6,
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": true,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": false,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "exp_name": "tf_aug_v2"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}

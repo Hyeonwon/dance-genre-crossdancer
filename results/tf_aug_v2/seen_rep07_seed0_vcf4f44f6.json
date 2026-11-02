@@ -1,0 +1,380 @@
+{
+ "model": "tf_aug_v2",
+ "seed": 0,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 1.0,
+ "epochs_run": 19,
+ "test": {
+  "window_acc": 0.9035588752196837,
+  "window_macro_f1": 0.9017101829472264,
+  "seq_acc": 0.9713656387665198,
+  "seq_macro_f1": 0.9717494006646868,
+  "per_genre_f1": {
+   "gBR": 0.9767441860465116,
+   "gPO": 0.9894736842105263,
+   "gLO": 0.9894736842105263,
+   "gWA": 0.9882352941176471,
+   "gMH": 0.9230769230769231,
+   "gLH": 0.9494949494949495,
+   "gHO": 0.9347826086956522,
+   "gKR": 0.9782608695652174,
+   "gJS": 1.0,
+   "gJB": 0.9879518072289156
+  },
+  "confusion": [
+   [
+    42,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    47,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    47,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    42,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    0,
+    42,
+    2,
+    1,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    47,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    43,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    45,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    45,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    41
+   ]
+  ],
+  "n_test_seqs": 454,
+  "seq_macro_f1_by_situation": {
+   "sBM": 0.9672672191991607,
+   "sFM": 1.0
+  }
+ },
+ "probe": {
+  "probe_acc": 0.6712573988857589,
+  "probe_chance": 0.33333333333333337,
+  "per_genre": {
+   "0": 0.4226190476190476,
+   "1": 0.8604651162790697,
+   "2": 0.6071428571428571,
+   "3": 0.5231788079470199,
+   "4": 0.7625,
+   "5": 0.8461538461538461,
+   "6": 0.8953488372093024,
+   "7": 0.6822429906542056,
+   "8": 0.5401069518716578,
+   "9": 0.5728155339805825
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 1.0131313383579255,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.8824298976885183
+  },
+  {
+   "epoch": 1,
+   "loss": 0.44471284086289614,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9717723160948968
+  },
+  {
+   "epoch": 2,
+   "loss": 0.3291219551926074,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9785145888594166
+  },
+  {
+   "epoch": 3,
+   "loss": 0.24326294971548992,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9495596124305802
+  },
+  {
+   "epoch": 4,
+   "loss": 0.21254182691159457,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9568315018315019
+  },
+  {
+   "epoch": 5,
+   "loss": 0.18533742000227388,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9713717317165592
+  },
+  {
+   "epoch": 6,
+   "loss": 0.1626456850896711,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9407299197733014
+  },
+  {
+   "epoch": 7,
+   "loss": 0.160078661662081,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9919484702093397
+  },
+  {
+   "epoch": 8,
+   "loss": 0.14316657896599044,
+   "adv_loss": null,
+   "val_seq_macro_f1": 1.0
+  },
+  {
+   "epoch": 9,
+   "loss": 0.1440784288327331,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9854111405835544
+  },
+  {
+   "epoch": 10,
+   "loss": 0.1252322927441286,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9776960408684546
+  },
+  {
+   "epoch": 11,
+   "loss": 0.12102827476742475,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9708750394584896
+  },
+  {
+   "epoch": 12,
+   "loss": 0.10019543589214268,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9717837121062928
+  },
+  {
+   "epoch": 13,
+   "loss": 0.10697640430830095,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856960408684546
+  },
+  {
+   "epoch": 14,
+   "loss": 0.10036113368266303,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9564354904354904
+  },
+  {
+   "epoch": 15,
+   "loss": 0.09075733581962793,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.992551724137931
+  },
+  {
+   "epoch": 16,
+   "loss": 0.0814715656897296,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.977992337164751
+  },
+  {
+   "epoch": 17,
+   "loss": 0.07502810135888664,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.978477650063857
+  },
+  {
+   "epoch": 18,
+   "loss": 0.07032301702901073,
+   "adv_loss": null,
+   "val_seq_macro_f1": 1.0
+  }
+ ],
+ "n_train_windows": 7386,
+ "n_test_windows": 4552,
+ "exp": "tf_aug_v2",
+ "setting": "seen",
+ "repeat": 7,
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": true,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": false,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "exp_name": "tf_aug_v2"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}
