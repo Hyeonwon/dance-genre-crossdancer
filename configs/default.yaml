@@ -40,7 +40,12 @@ nn:
   weight_decay: 1.0e-4
   batch_size: 64
   max_epochs: 100
-  patience: 10                 # 검증 Macro-F1 기준 조기 종료
+  patience: 10                 # 검증 Macro-F1 기준 조기 종료 (selection: best_val 일 때만)
+  # 모델 선택 방식
+  #   best_val: 검증 Macro-F1이 가장 높은 epoch (기존 방식). 단, 검증셋이 학습과 같은 댄서라
+  #             점수가 금방 1.0에 붙어서 '처음 보는 댄서' 성능과는 거의 무관하게 고르게 됨
+  #   last:     max_epochs 만큼 고정 학습 후 마지막 모델 사용 (검증셋으로 고르지 않음)
+  selection: best_val
   seeds: [0, 1, 2]
   num_workers: 0
   stats_windows: 3000          # 입력 표준화(mean/std)를 계산할 학습 윈도우 수

@@ -150,13 +150,18 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
         log(f"  epoch {epoch:3d} loss {tot / max(nb, 1):.4f}"
             + (f" adv {tot_adv / max(nb, 1):.4f}" if adv else "")
             + f" val_f1 {f1:.4f} ({time.time() - t0:.1f}s)")
+        if n.get("selection", "best_val") == "last":
+            # 고정 epoch: 검증셋(학습과 같은 댄서)으로 모델을 고르지 않는다
+            best = max(best, f1)
+            continue
         if f1 > best:
             best, best_state, bad = f1, copy.deepcopy(model.state_dict()), 0
         else:
             bad += 1
             if bad >= n["patience"]:
                 break
-    model.load_state_dict(best_state)
+    if best_state is not None:
+        model.load_state_dict(best_state)
 
     P, Y, _, I, _ = predict(model, dl_te, device)
     test = compute_metrics(P, Y, [ds_te.items[i][0] for i in I], cache, g2i)
