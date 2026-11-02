@@ -22,8 +22,8 @@ bash tests/smoke_test.sh
 ```
 
 ### 데이터 준비
-1. AIST++ 공식 사이트(google.github.io/aistplusplus_dataset)에서 **annotations**를 받는다. 영상은 필요 없다.
-2. 압축을 풀어서 `keypoints3d/` 폴더와 `ignore_list.txt`가 들어 있는 폴더를 `data/aist_plusplus_final/` 에 둔다.
+1. AIST++ 데이터는 GitHub 릴리스로 옮겨졌다(예전 Google Storage 링크는 만료). 릴리스 Assets 에서 **`keypoints3d.zip`, `ignore_list.txt`** 두 개만 받는다.
+2. `data/aist_plusplus_final/keypoints3d/*.pkl` 과 `data/aist_plusplus_final/ignore_list.txt` 가 되도록 둔다.
    - 다른 위치에 두려면 `configs/default.yaml`의 `paths.anno_dir` 를 수정하면 된다.
 3. `data/`와 `results/`는 git에 올리지 않는다(.gitignore). 각자 로컬에서 만든다.
 

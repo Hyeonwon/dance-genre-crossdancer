@@ -49,16 +49,31 @@ Windows에서 `bash`가 안 되면 Git Bash로 실행하세요.
 
 ## 1단계. 데이터 다운로드 (30분)
 
-1. AIST++ 공식 사이트 (https://google.github.io/aistplusplus_dataset) 에서 **annotations** 를 받으세요. **영상은 받지 마세요** (용량만 크고 안 씀).
-2. 압축을 풀어서 `keypoints3d/` 폴더와 `ignore_list.txt` 가 들어 있는 폴더를 아래 위치에 두세요.
+AIST++ 사이트의 예전 다운로드 링크는 만료돼서, 파일이 **GitHub 릴리스 페이지**로 옮겨졌어요.
+(AIST++ 사이트 https://google.github.io/aistplusplus_dataset 의 다운로드 안내를 따라가면 나와요. 주소는 형원에게 받아도 됨)
 
+릴리스 페이지의 Assets 에서 **딱 두 개만** 받으세요.
+
+| 파일 | 크기 | 받기 |
+|---|---|---|
+| `keypoints3d.zip` | 836MB | ✅ |
+| `ignore_list.txt` | 1KB | ✅ |
+| 나머지 (keypoints2d, motions, cameras, splits) | | ❌ 안 받아도 됨 |
+
+레포 안에 넣기:
+```bash
+mkdir -p data/aist_plusplus_final
+unzip ~/Downloads/keypoints3d.zip -d data/aist_plusplus_final/
+cp ~/Downloads/ignore_list.txt data/aist_plusplus_final/
+```
+
+최종 구조는 이렇게 되어야 해요. 압축을 풀었을 때 폴더가 한 단계 더 안쪽에 생기면 옮겨서 맞춰 주세요.
 ```
 dance-genre-crossdancer/
 └── data/
     └── aist_plusplus_final/
         ├── keypoints3d/        ← .pkl 파일 1,400개 정도
-        ├── ignore_list.txt
-        └── (motions/, keypoints2d/ 등 다른 폴더는 있어도 되고 없어도 됨)
+        └── ignore_list.txt
 ```
 
 확인:
