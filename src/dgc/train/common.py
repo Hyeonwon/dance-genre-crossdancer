@@ -23,7 +23,7 @@ def save_result(path: Path, payload: dict):
             return o.tolist()
         raise TypeError(type(o))
 
-    path.write_text(json.dumps(payload, indent=1, ensure_ascii=False, default=_default))
+    path.write_text(json.dumps(payload, indent=1, ensure_ascii=False, default=_default), encoding="utf-8")
 
 
 def parse_repeats(arg: str | None, n: int) -> list[int]:

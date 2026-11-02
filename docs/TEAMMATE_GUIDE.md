@@ -32,16 +32,22 @@ cd dance-genre-crossdancer
 
 # 가상환경 (권장)
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate          # Mac/Linux
 
 pip install -r requirements.txt
 pip install matplotlib scipy        # 5~6단계 그림용
 
 # 가짜 데이터로 전체가 도는지 확인 (몇 분)
-bash tests/smoke_test.sh
+python tests/smoke_test.py
 ```
 
-Windows에서 `bash`가 안 되면 Git Bash로 실행하세요.
+**Windows (PowerShell)** 는 가상환경 활성화가 달라요:
+```powershell
+python -m venv .venv                 # 'python'이 없다고 나오면 py -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1          # 줄 앞에 (.venv) 가 붙으면 성공
+```
+데이터 압축 해제는 파일 탐색기로 해도 돼요. 최종 폴더 구조만 1단계 그림과 같으면 됩니다.
 
 **완료 기준:** 마지막 줄에 `스모크 테스트 통과`가 나오면 OK. 중간 숫자는 가짜 데이터라 의미 없어요.
 

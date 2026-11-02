@@ -27,7 +27,7 @@ current = prep_version(cfg)
 rows = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))   # ver -> (exp, setting) -> metric
 settings, newest = {}, defaultdict(float)
 for p in sorted(root.glob("*/*.json")):
-    r = json.loads(p.read_text())
+    r = json.loads(p.read_text(encoding="utf-8"))
     if "test" not in r:
         continue
     ver = r.get("prep_version", "unknown")

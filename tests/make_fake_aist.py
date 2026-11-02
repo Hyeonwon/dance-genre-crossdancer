@@ -61,7 +61,7 @@ def main():
                     with open(out / "keypoints3d" / f"{name}.pkl", "wb") as f:
                         pickle.dump({"keypoints3d": J}, f)
                     names.append(name)
-    (out / "ignore_list.txt").write_text(names[0] + "\n")
+    (out / "ignore_list.txt").write_text(names[0] + "\n", encoding="utf-8")
     print(f"가짜 데이터 {len(names)}개 시퀀스 → {out}")
 
 

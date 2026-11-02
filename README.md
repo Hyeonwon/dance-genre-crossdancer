@@ -18,7 +18,7 @@ cd dance-genre-crossdancer
 pip install -r requirements.txt
 
 # 1) 진짜 데이터 없이 전체가 도는지 먼저 확인 (CPU 몇 분)
-bash tests/smoke_test.sh
+python tests/smoke_test.py
 ```
 
 ### 데이터 준비
@@ -107,7 +107,7 @@ tests/                  가짜 데이터 생성, 스모크 테스트
 
 ### 팀원 체크리스트 (요약)
 **1주차 (~11/8): 데이터 확인 + 기준선**
-- [ ] 레포 클론 → `pip install -r requirements.txt` → `bash tests/smoke_test.sh` 가 "스모크 테스트 통과"로 끝나는지 확인
+- [ ] 레포 클론 → `pip install -r requirements.txt` → `python tests/smoke_test.py` 가 "스모크 테스트 통과"로 끝나는지 확인
 - [ ] AIST++ annotations 다운로드 → 압축 풀어서 `data/aist_plusplus_final/` 에 두기
 - [ ] `python scripts/00_inspect_data.py` → 만들어진 `results/data_report.md` 를 형원에게 공유
 - [ ] `python scripts/01_build_cache.py` → `python scripts/02_make_splits.py`
@@ -129,7 +129,7 @@ tests/                  가짜 데이터 생성, 스모크 테스트
 
 ### 작업 규칙
 - 작업마다 브랜치를 만들고 PR로 합친다. 예: `feat/confusion-analysis`
-- PR 전에 `bash tests/smoke_test.sh` 가 통과하는지 확인한다.
+- PR 전에 `python tests/smoke_test.py` 가 통과하는지 확인한다.
 - **결과 공유:** 실험이 끝나면 `results/` 안의 json(과 그림)을 커밋해서 올린다. 각자 다른 실험 폴더(`results/xgb*/`, `results/tf_*/`)에 쓰니까 충돌하지 않는다. `results/summary.md` 는 올리지 않고 각자 `05_summarize.py` 로 만든다.
 - 분할 파일(`data/splits/`)은 같은 데이터·같은 seed면 누가 만들어도 같다.
 
