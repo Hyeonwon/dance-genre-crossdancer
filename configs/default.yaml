@@ -46,6 +46,7 @@ nn:
   #             점수가 금방 1.0에 붙어서 '처음 보는 댄서' 성능과는 거의 무관하게 고르게 됨
   #   last:     max_epochs 만큼 고정 학습 후 마지막 모델 사용 (검증셋으로 고르지 않음)
   selection: best_val
+  grad_clip: 1.0               # 기울기 크기 제한 (적대 학습 폭주 방지). 0이면 끔
   seeds: [0, 1, 2]
   num_workers: 0
   stats_windows: 3000          # 입력 표준화(mean/std)를 계산할 학습 윈도우 수
@@ -62,6 +63,7 @@ adv:
   gamma: 10.0                  # λ 스케줄: λ(p) = 2/(1+exp(-γp)) - 1
   hidden: 128
   lr_mult: 10.0               # 판별기 학습률 = nn.lr × lr_mult
+  lambda_max: 0.5              # λ 최댓값. 1.0이면 학습 후반에 손실이 폭주하는 현상이 실제 데이터에서 관찰됨
 
 probe:
   max_windows_per_genre: 2000  # 개인 정보량 측정용 선형 분류기 학습 윈도우 수 (장르당)
