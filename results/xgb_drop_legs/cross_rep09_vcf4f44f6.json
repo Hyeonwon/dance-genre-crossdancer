@@ -1,0 +1,330 @@
+{
+ "model": "xgb",
+ "best_max_depth": 3,
+ "val_seq_macro_f1": 0.9198168384002887,
+ "best_iteration": 494,
+ "test": {
+  "window_acc": 0.5581078007732545,
+  "window_macro_f1": 0.534969483008789,
+  "seq_acc": 0.6586433260393874,
+  "seq_macro_f1": 0.6309740565452724,
+  "per_genre_f1": {
+   "gBR": 0.6736842105263158,
+   "gPO": 0.8888888888888888,
+   "gLO": 0.822429906542056,
+   "gWA": 0.6526315789473685,
+   "gMH": 0.49056603773584906,
+   "gLH": 0.208955223880597,
+   "gHO": 0.6666666666666666,
+   "gKR": 0.8478260869565217,
+   "gJS": 0.8041237113402062,
+   "gJB": 0.25396825396825395
+  },
+  "confusion": [
+   [
+    32,
+    0,
+    3,
+    0,
+    4,
+    0,
+    0,
+    3,
+    0,
+    4
+   ],
+   [
+    0,
+    44,
+    0,
+    0,
+    0,
+    1,
+    2,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    44,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    0,
+    2,
+    31,
+    2,
+    0,
+    0,
+    0,
+    2,
+    6
+   ],
+   [
+    6,
+    1,
+    0,
+    0,
+    26,
+    9,
+    3,
+    2,
+    0,
+    0
+   ],
+   [
+    1,
+    2,
+    1,
+    7,
+    12,
+    7,
+    11,
+    1,
+    4,
+    1
+   ],
+   [
+    6,
+    3,
+    0,
+    0,
+    4,
+    2,
+    31,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    2,
+    0,
+    0,
+    5,
+    1,
+    0,
+    39,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    4,
+    0,
+    0,
+    0,
+    0,
+    39,
+    1
+   ],
+   [
+    4,
+    0,
+    9,
+    10,
+    4,
+    0,
+    0,
+    0,
+    7,
+    8
+   ]
+  ],
+  "n_test_seqs": 457,
+  "seq_macro_f1_by_situation": {
+   "sBM": 0.6336742737624903,
+   "sFM": 0.5985064935064935
+  }
+ },
+ "top_features_gain": [
+  [
+   "r_shoulder_acc_mean",
+   0.044851381331682205
+  ],
+  [
+   "nose_speed_mean",
+   0.04318438842892647
+  ],
+  [
+   "r_shoulder_jerk_mean",
+   0.040049612522125244
+  ],
+  [
+   "root_height_mean",
+   0.03715452924370766
+  ],
+  [
+   "l_shoulder_acc_mean",
+   0.026745466515421867
+  ],
+  [
+   "root_height_range",
+   0.026636118069291115
+  ],
+  [
+   "l_elbow_speed_std",
+   0.025190895423293114
+  ],
+  [
+   "l_ear_speed_mean",
+   0.024885930120944977
+  ],
+  [
+   "r_wrist_speed_std",
+   0.024503417313098907
+  ],
+  [
+   "nose_acc_mean",
+   0.02427474781870842
+  ],
+  [
+   "l_shoulder_jerk_mean",
+   0.024214021861553192
+  ],
+  [
+   "l_eye_jerk_mean",
+   0.024089666083455086
+  ],
+  [
+   "r_elbow_jerk_mean",
+   0.023504406213760376
+  ],
+  [
+   "l_eye_speed_mean",
+   0.023231297731399536
+  ],
+  [
+   "l_ear_acc_mean",
+   0.02272696979343891
+  ],
+  [
+   "r_ear_jerk_mean",
+   0.022461919113993645
+  ],
+  [
+   "lr_symmetry",
+   0.020672330632805824
+  ],
+  [
+   "r_wrist_jerk_mean",
+   0.020366469398140907
+  ],
+  [
+   "r_eye_speed_mean",
+   0.020018652081489563
+  ],
+  [
+   "l_elbow_jerk_mean",
+   0.019624866545200348
+  ]
+ ],
+ "n_train_windows": 7572,
+ "n_test_windows": 4397,
+ "exp": "xgb_drop_legs",
+ "setting": "cross",
+ "repeat": 9,
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": [
+    "legs"
+   ]
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 100,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": false,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": false,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  }
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}
