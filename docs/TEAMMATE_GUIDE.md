@@ -154,7 +154,7 @@ git push -u origin exp/xgb-baseline
 
 ---
 
-## 5단계. 혼동 행렬 분석 (11/15까지)
+## 5단계. 혼동 행렬 분석 → ✅ 완료 (형원, `scripts/07_confusion_analysis.py`)
 
 `scripts/07_confusion_analysis.py` 를 구현해요. 파일 안에도 설명이 있어요. **"어떤 장르끼리 헷갈리는지"** 를 그림과 표로 보여주는 작업이에요.
 
@@ -198,7 +198,7 @@ P = M / M.sum(axis=1, keepdims=True)
 
 ---
 
-## 6단계. 발표용 그래프 (11/22까지)
+## 6단계. 발표용 그래프 → ✅ 완료 (형원, `scripts/10_figures.py`, 결과 `results/analysis/`)
 
 형원 실험이 **전부 끝나서 지금 바로 시작해도 돼요.**
 
