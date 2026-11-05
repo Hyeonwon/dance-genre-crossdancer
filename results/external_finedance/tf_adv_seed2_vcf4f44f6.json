@@ -1,0 +1,285 @@
+{
+ "model": "tf_adv",
+ "seed": 2,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 0.9952353942144072,
+ "epochs_run": 16,
+ "test": null,
+ "probe": {
+  "probe_acc": 0.7057364941575524,
+  "probe_chance": 0.33333333333333337,
+  "per_genre": {
+   "0": 0.6378378378378379,
+   "1": 0.9230769230769231,
+   "2": 0.7053941908713693,
+   "3": 0.6523809523809524,
+   "4": 0.6832579185520362,
+   "5": 0.7172413793103448,
+   "6": 0.73125,
+   "7": 0.8243243243243243,
+   "8": 0.6074380165289256,
+   "9": 0.5751633986928104
+  }
+ },
+ "external": {
+  "n_seqs": 76,
+  "n_windows": 8836,
+  "open": {
+   "seq_acc": 0.4868421052631579,
+   "seq_macro_f1": 0.3918181818181818,
+   "per_genre_f1": {
+    "breaking": 0.26666666666666666,
+    "popping": 0.9090909090909091,
+    "locking": 0.0,
+    "hiphop": 0.5333333333333333,
+    "jazz": 0.25
+   }
+  },
+  "restricted": {
+   "seq_acc": 0.6052631578947368,
+   "seq_macro_f1": 0.48185364541296744,
+   "per_genre_f1": {
+    "breaking": 0.7619047619047619,
+    "popping": 0.8888888888888888,
+    "locking": 0.0,
+    "hiphop": 0.5084745762711864,
+    "jazz": 0.25
+   }
+  },
+  "pred_counts_open": {
+   "breaking": {
+    "gHO": 9,
+    "gMH": 1,
+    "gKR": 1,
+    "gBR": 2
+   },
+   "popping": {
+    "gPO": 20,
+    "gKR": 1
+   },
+   "locking": {
+    "gKR": 3
+   },
+   "hiphop": {
+    "gMH": 9,
+    "gPO": 3,
+    "gLH": 3,
+    "gKR": 2,
+    "gHO": 1
+   },
+   "jazz": {
+    "gLH": 13,
+    "gMH": 1,
+    "gJS": 3,
+    "gKR": 4
+   }
+  },
+  "n_per_genre": {
+   "breaking": 13,
+   "popping": 21,
+   "locking": 3,
+   "hiphop": 18,
+   "jazz": 21
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 1.6828276176344266,
+   "adv_loss": 1.0688028037548065,
+   "val_seq_macro_f1": 0.9550572318698173
+  },
+  {
+   "epoch": 1,
+   "loss": 1.4351214678450064,
+   "adv_loss": 1.2010016265240582,
+   "val_seq_macro_f1": 0.9657521757521759
+  },
+  {
+   "epoch": 2,
+   "loss": 1.3221136768433182,
+   "adv_loss": 1.1631328324702652,
+   "val_seq_macro_f1": 0.9503846242747844
+  },
+  {
+   "epoch": 3,
+   "loss": 1.3497467752207408,
+   "adv_loss": 1.2232664532282136,
+   "val_seq_macro_f1": 0.9858943089430895
+  },
+  {
+   "epoch": 4,
+   "loss": 1.4205281863158399,
+   "adv_loss": 1.3189288963648407,
+   "val_seq_macro_f1": 0.9610755421648933
+  },
+  {
+   "epoch": 5,
+   "loss": 1.3176235969771037,
+   "adv_loss": 1.207459873773835,
+   "val_seq_macro_f1": 0.9952353942144072
+  },
+  {
+   "epoch": 6,
+   "loss": 1.5130294534293087,
+   "adv_loss": 1.4315615079619668,
+   "val_seq_macro_f1": 0.9806914205099118
+  },
+  {
+   "epoch": 7,
+   "loss": 1.3451309102502735,
+   "adv_loss": 1.2415793307802894,
+   "val_seq_macro_f1": 0.9803133387793208
+  },
+  {
+   "epoch": 8,
+   "loss": 1.4817253391851077,
+   "adv_loss": 1.3875728324055672,
+   "val_seq_macro_f1": 0.9904734894525025
+  },
+  {
+   "epoch": 9,
+   "loss": 1.5211592059243808,
+   "adv_loss": 1.454471431672573,
+   "val_seq_macro_f1": 0.9806747516049843
+  },
+  {
+   "epoch": 10,
+   "loss": 1.395289933816953,
+   "adv_loss": 1.3106801936572248,
+   "val_seq_macro_f1": 0.9952353942144072
+  },
+  {
+   "epoch": 11,
+   "loss": 1.5335083536126397,
+   "adv_loss": 1.4570086178454487,
+   "val_seq_macro_f1": 0.980669910738275
+  },
+  {
+   "epoch": 12,
+   "loss": 1.4860922125252811,
+   "adv_loss": 1.4278851239518686,
+   "val_seq_macro_f1": 0.985891181988743
+  },
+  {
+   "epoch": 13,
+   "loss": 1.6013303168795325,
+   "adv_loss": 1.5487081347541376,
+   "val_seq_macro_f1": 0.9806720505812961
+  },
+  {
+   "epoch": 14,
+   "loss": 1.4931467365134845,
+   "adv_loss": 1.4443230730566112,
+   "val_seq_macro_f1": 0.9853096914072523
+  },
+  {
+   "epoch": 15,
+   "loss": 1.457825943827629,
+   "adv_loss": 1.3471191681244157,
+   "val_seq_macro_f1": 0.9556558275928667
+  }
+ ],
+ "n_train_windows": 11305,
+ "n_test_windows": 0,
+ "exp": "tf_adv",
+ "setting": "external_finedance",
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": false,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": true,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "finedance": {
+   "root": "data/finedance",
+   "cache": "data/cache/finedance_30fps.pkl",
+   "calib": "configs/smpl_calib.json",
+   "src_fps": 30,
+   "smooth_sigma": 2.0
+  },
+  "exp_name": "tf_adv"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}

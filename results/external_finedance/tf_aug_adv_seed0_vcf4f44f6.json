@@ -1,0 +1,311 @@
+{
+ "model": "tf_aug_adv",
+ "seed": 0,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 1.0,
+ "epochs_run": 20,
+ "test": null,
+ "probe": {
+  "probe_acc": 0.652815909051859,
+  "probe_chance": 0.33333333333333337,
+  "per_genre": {
+   "0": 0.7189189189189189,
+   "1": 0.8012820512820513,
+   "2": 0.7302904564315352,
+   "3": 0.5952380952380952,
+   "4": 0.5294117647058824,
+   "5": 0.5758620689655173,
+   "6": 0.7125,
+   "7": 0.6824324324324325,
+   "8": 0.5743801652892562,
+   "9": 0.6078431372549019
+  }
+ },
+ "external": {
+  "n_seqs": 76,
+  "n_windows": 8836,
+  "open": {
+   "seq_acc": 0.42105263157894735,
+   "seq_macro_f1": 0.4647642679900745,
+   "per_genre_f1": {
+    "breaking": 0.9230769230769231,
+    "popping": 0.5,
+    "locking": 0.0,
+    "hiphop": 0.5161290322580645,
+    "jazz": 0.38461538461538464
+   }
+  },
+  "restricted": {
+   "seq_acc": 0.7236842105263158,
+   "seq_macro_f1": 0.7163443551751517,
+   "per_genre_f1": {
+    "breaking": 0.8387096774193549,
+    "popping": 0.7058823529411765,
+    "locking": 0.6666666666666666,
+    "hiphop": 0.723404255319149,
+    "jazz": 0.6470588235294118
+   }
+  },
+  "pred_counts_open": {
+   "breaking": {
+    "gBR": 12,
+    "gKR": 1
+   },
+   "popping": {
+    "gPO": 7,
+    "gKR": 6,
+    "gLH": 4,
+    "gWA": 4
+   },
+   "locking": {
+    "gKR": 3
+   },
+   "hiphop": {
+    "gMH": 5,
+    "gHO": 6,
+    "gLH": 3,
+    "gKR": 3,
+    "gWA": 1
+   },
+   "jazz": {
+    "gBR": 1,
+    "gHO": 3,
+    "gJS": 5,
+    "gWA": 9,
+    "gKR": 2,
+    "gLH": 1
+   }
+  },
+  "n_per_genre": {
+   "breaking": 13,
+   "popping": 21,
+   "locking": 3,
+   "hiphop": 18,
+   "jazz": 21
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 1.9719368917020885,
+   "adv_loss": 1.1736584502187641,
+   "val_seq_macro_f1": 0.9419185219746075
+  },
+  {
+   "epoch": 1,
+   "loss": 1.5228580791841855,
+   "adv_loss": 1.1580822786146945,
+   "val_seq_macro_f1": 0.9710410519712844
+  },
+  {
+   "epoch": 2,
+   "loss": 1.4201909391717478,
+   "adv_loss": 1.1425857584584842,
+   "val_seq_macro_f1": 0.8892504417002554
+  },
+  {
+   "epoch": 3,
+   "loss": 1.4218763241713697,
+   "adv_loss": 1.2007135935127735,
+   "val_seq_macro_f1": 0.9657819460258483
+  },
+  {
+   "epoch": 4,
+   "loss": 1.5815011235800656,
+   "adv_loss": 1.401065936142748,
+   "val_seq_macro_f1": 0.9900936671214605
+  },
+  {
+   "epoch": 5,
+   "loss": 1.4506464288993315,
+   "adv_loss": 1.2733346748758445,
+   "val_seq_macro_f1": 0.9528309774770651
+  },
+  {
+   "epoch": 6,
+   "loss": 1.3105412044308402,
+   "adv_loss": 1.1183645738796755,
+   "val_seq_macro_f1": 0.985436656366889
+  },
+  {
+   "epoch": 7,
+   "loss": 1.2889417525042186,
+   "adv_loss": 1.1364673288031057,
+   "val_seq_macro_f1": 0.9608734210265691
+  },
+  {
+   "epoch": 8,
+   "loss": 1.4998853409832174,
+   "adv_loss": 1.351021058857441,
+   "val_seq_macro_f1": 0.9804452053544509
+  },
+  {
+   "epoch": 9,
+   "loss": 1.4866784824566408,
+   "adv_loss": 1.3479346030137755,
+   "val_seq_macro_f1": 1.0
+  },
+  {
+   "epoch": 10,
+   "loss": 1.4989529103040695,
+   "adv_loss": 1.397012942216613,
+   "val_seq_macro_f1": 0.980928034907048
+  },
+  {
+   "epoch": 11,
+   "loss": 1.507264349948276,
+   "adv_loss": 1.3767087574709544,
+   "val_seq_macro_f1": 0.9857088836669098
+  },
+  {
+   "epoch": 12,
+   "loss": 1.5229549766941504,
+   "adv_loss": 1.408291558650407,
+   "val_seq_macro_f1": 0.980830834886422
+  },
+  {
+   "epoch": 13,
+   "loss": 1.2614663263613528,
+   "adv_loss": 1.115525514564731,
+   "val_seq_macro_f1": 0.9641367159971811
+  },
+  {
+   "epoch": 14,
+   "loss": 1.2812724418260835,
+   "adv_loss": 1.144509575583718,
+   "val_seq_macro_f1": 0.976016279995293
+  },
+  {
+   "epoch": 15,
+   "loss": 2.012501160529527,
+   "adv_loss": 1.8901014300909909,
+   "val_seq_macro_f1": 0.980930735930736
+  },
+  {
+   "epoch": 16,
+   "loss": 1.6014261354099621,
+   "adv_loss": 1.4940908253192902,
+   "val_seq_macro_f1": 0.9762765841457574
+  },
+  {
+   "epoch": 17,
+   "loss": 1.783046704801646,
+   "adv_loss": 1.6732794046401978,
+   "val_seq_macro_f1": 0.9853309481216458
+  },
+  {
+   "epoch": 18,
+   "loss": 1.5421710353006015,
+   "adv_loss": 1.4605704166672446,
+   "val_seq_macro_f1": 0.9856926406926407
+  },
+  {
+   "epoch": 19,
+   "loss": 1.7597470046444372,
+   "adv_loss": 1.6625218879092822,
+   "val_seq_macro_f1": 0.9855869324473975
+  }
+ ],
+ "n_train_windows": 11305,
+ "n_test_windows": 0,
+ "exp": "tf_aug_adv",
+ "setting": "external_finedance",
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": true,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": true,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "finedance": {
+   "root": "data/finedance",
+   "cache": "data/cache/finedance_30fps.pkl",
+   "calib": "configs/smpl_calib.json",
+   "src_fps": 30,
+   "smooth_sigma": 2.0
+  },
+  "exp_name": "tf_aug_adv"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}

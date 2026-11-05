@@ -1,0 +1,330 @@
+{
+ "model": "tf_aug",
+ "seed": 2,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 0.9903600464576074,
+ "epochs_run": 23,
+ "test": null,
+ "probe": {
+  "probe_acc": 0.6506135917965847,
+  "probe_chance": 0.33333333333333337,
+  "per_genre": {
+   "0": 0.5783783783783784,
+   "1": 0.8076923076923077,
+   "2": 0.7468879668049793,
+   "3": 0.5380952380952381,
+   "4": 0.5610859728506787,
+   "5": 0.6724137931034483,
+   "6": 0.79375,
+   "7": 0.722972972972973,
+   "8": 0.5619834710743802,
+   "9": 0.5228758169934641
+  }
+ },
+ "external": {
+  "n_seqs": 76,
+  "n_windows": 8836,
+  "open": {
+   "seq_acc": 0.6842105263157895,
+   "seq_macro_f1": 0.6780342555994731,
+   "per_genre_f1": {
+    "breaking": 0.96,
+    "popping": 0.8695652173913043,
+    "locking": 0.3333333333333333,
+    "hiphop": 0.5,
+    "jazz": 0.7272727272727273
+   }
+  },
+  "restricted": {
+   "seq_acc": 0.8157894736842105,
+   "seq_macro_f1": 0.771967151922359,
+   "per_genre_f1": {
+    "breaking": 1.0,
+    "popping": 0.851063829787234,
+    "locking": 0.5,
+    "hiphop": 0.6666666666666666,
+    "jazz": 0.8421052631578947
+   }
+  },
+  "pred_counts_open": {
+   "breaking": {
+    "gBR": 12,
+    "gJB": 1
+   },
+   "popping": {
+    "gPO": 20,
+    "gKR": 1
+   },
+   "locking": {
+    "gLO": 1,
+    "gKR": 1,
+    "gLH": 1
+   },
+   "hiphop": {
+    "gLH": 6,
+    "gLO": 2,
+    "gPO": 4,
+    "gMH": 1,
+    "gHO": 4,
+    "gWA": 1
+   },
+   "jazz": {
+    "gJS": 12,
+    "gHO": 1,
+    "gLH": 2,
+    "gWA": 3,
+    "gKR": 2,
+    "gPO": 1
+   }
+  },
+  "n_per_genre": {
+   "breaking": 13,
+   "popping": 21,
+   "locking": 3,
+   "hiphop": 18,
+   "jazz": 21
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 0.8302789173004302,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.8442051429487181
+  },
+  {
+   "epoch": 1,
+   "loss": 0.39368402788584883,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9415734941776079
+  },
+  {
+   "epoch": 2,
+   "loss": 0.26478890410031786,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9808665452627598
+  },
+  {
+   "epoch": 3,
+   "loss": 0.22055209102109075,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9601834395714445
+  },
+  {
+   "epoch": 4,
+   "loss": 0.1741215400821106,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9654824434404695
+  },
+  {
+   "epoch": 5,
+   "loss": 0.17223714965141632,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9757053307819048
+  },
+  {
+   "epoch": 6,
+   "loss": 0.14011870250529188,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.985331762359556
+  },
+  {
+   "epoch": 7,
+   "loss": 0.1478935599813915,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9760208877905985
+  },
+  {
+   "epoch": 8,
+   "loss": 0.1182309545957568,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9855869324473975
+  },
+  {
+   "epoch": 9,
+   "loss": 0.10853238620752977,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856976744186046
+  },
+  {
+   "epoch": 10,
+   "loss": 0.09850426988718523,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9761001788908766
+  },
+  {
+   "epoch": 11,
+   "loss": 0.09716398998650468,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.981004624983638
+  },
+  {
+   "epoch": 12,
+   "loss": 0.09501537110190839,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9903600464576074
+  },
+  {
+   "epoch": 13,
+   "loss": 0.08176715874684636,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.985436656366889
+  },
+  {
+   "epoch": 14,
+   "loss": 0.07621845576994185,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9805733697197112
+  },
+  {
+   "epoch": 15,
+   "loss": 0.07838358082120646,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9711661301451432
+  },
+  {
+   "epoch": 16,
+   "loss": 0.07512314482962458,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.980811890888465
+  },
+  {
+   "epoch": 17,
+   "loss": 0.0715122368525375,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9857088836669098
+  },
+  {
+   "epoch": 18,
+   "loss": 0.06966493107822978,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9806747516049843
+  },
+  {
+   "epoch": 19,
+   "loss": 0.06371878798050933,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9759128468430796
+  },
+  {
+   "epoch": 20,
+   "loss": 0.06537723740753294,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9853290613358678
+  },
+  {
+   "epoch": 21,
+   "loss": 0.060135065527654,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9858118908884649
+  },
+  {
+   "epoch": 22,
+   "loss": 0.05588443271302491,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9804587273191924
+  }
+ ],
+ "n_train_windows": 11305,
+ "n_test_windows": 0,
+ "exp": "tf_aug",
+ "setting": "external_finedance",
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": true,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": false,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "finedance": {
+   "root": "data/finedance",
+   "cache": "data/cache/finedance_30fps.pkl",
+   "calib": "configs/smpl_calib.json",
+   "src_fps": 30,
+   "smooth_sigma": 2.0
+  },
+  "exp_name": "tf_aug"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}
