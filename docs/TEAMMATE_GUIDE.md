@@ -16,7 +16,7 @@
 |---|---|
 | **11/8 (일)** | 0~4단계: 환경 준비, 데이터 확인, XGBoost 실험 |
 | **11/15 (일)** | 5단계: 혼동 행렬 분석 |
-| **11/22 (일)** | 6단계: 발표용 표·그래프 (형원 결과가 올라온 뒤) |
+| **11/22 (일)** | 6단계: 발표용 그래프 7장 (지금 시작 가능) |
 
 **11/8 결과가 제일 중요해요.** 이 숫자를 보고 프로젝트 방향을 확정하거든요.
 
@@ -198,25 +198,46 @@ P = M / M.sum(axis=1, keepdims=True)
 
 ---
 
-## 6단계. 발표용 표·그래프 (11/22까지)
+## 6단계. 발표용 그래프 (11/22까지)
 
-형원이 Transformer 결과를 올렸다고 알려 주면 시작하세요.
+형원 실험이 **전부 끝나서 지금 바로 시작해도 돼요.**
 
 ```bash
 git checkout main
 git pull
-python scripts/05_summarize.py
 ```
 
-### 만들 것 (`results/analysis/` 에 png로)
-1. **실험별 성능 막대그래프:** x축 = 실험(xgb, tf_plain, tf_aug, tf_adv, tf_aug_adv), 막대 2개(cross, seen), y축 = 시퀀스 Macro-F1, 오차 막대 = 표준편차
+`scripts/10_figures.py` 를 새로 만들어서, 아래 그림을 `results/analysis/` 에 png로 저장해요.
+숫자는 전부 `results/` 안의 json 에서 읽어요.
+
+### 읽을 결과 폴더 (중요)
+| 폴더 | 내용 | 파일 |
+|---|---|---|
+| `xgb` | XGBoost | `cross_rep00 ~ 09`, `seen_rep00 ~ 09` |
+| `tf_plain_v2`, `tf_aug_v2`, `tf_adv_v2`, `tf_aug_adv_v2` | Transformer 4종 | 반복 10개 × 시드 3개 (`_seed0`, `_seed1`, `_seed2`) |
+| `tf_aug_adv_lam0.25`, `tf_aug_adv_lam1.0` | 적대 학습 세기 실험 | 시드 0만 |
+| `xgb_drop_head/arms/legs` | 부위 제거 | cross 10개 |
+| `external_finedance` | 다른 데이터셋(FineDance) 시험 | 실험별 시드 0~2 |
+
+- `tf_plain`, `tf_aug_adv` (뒤에 `_v2` 없는 폴더)는 **예전 버전이라 쓰지 마세요.**
+- 시드가 여러 개인 경우: **같은 반복(rep)끼리 시드 평균** → 그다음 반복 10개의 평균·표준편차.
+- 점수: `test.seq_macro_f1`. FineDance만 `external.open.seq_macro_f1` (10개 장르 중 고르기) 와
+  `external.restricted.seq_macro_f1` (겹치는 5개 중 고르기).
+
+### 만들 그림
+1. **실험별 성능 막대그래프:** x축 = xgb, tf_plain, tf_adv, tf_aug, tf_aug_adv (`_v2`), 막대 2개(cross, seen), 오차 막대 = 표준편차
 2. **댄서 의존도 막대그래프:** 실험별 (seen − cross)
-3. **부위 제거 그래프:** xgb vs drop_head / drop_arms / drop_legs 의 cross Macro-F1
-4. 5단계 혼동 행렬 그림을 `tf_aug_adv` 로도 한 장
+3. **적대 학습 세기 그래프 (꺾은선):** x축 = 세기 0, 0.25, 0.5, 1.0 / y축 = cross Macro-F1. 모두 **시드 0** 파일만 사용
+   - 0 → `tf_aug_v2`, 0.25 → `tf_aug_adv_lam0.25`, 0.5 → `tf_aug_adv_v2`, 1.0 → `tf_aug_adv_lam1.0`
+4. **개인 정보 그래프:** 실험별 `probe.probe_acc` 평균 (cross 결과에서). 가로선으로 `probe.probe_chance`(0.5) 표시
+5. **부위 제거 그래프:** xgb vs drop_head / drop_arms / drop_legs 의 cross Macro-F1
+6. **FineDance 그래프:** x축 = 실험 5개, 막대 2개(open, restricted), 오차 막대 = 시드 표준편차 (xgb는 1개라 막대 없음). `_raw` 결과는 빼기
+7. 5단계 혼동 행렬을 `tf_aug_adv_v2` 로도 한 장
 
-숫자는 `results/<실험>/*.json` 의 `test.seq_macro_f1` 을 읽어서 평균·표준편차를 내면 돼요. `05_summarize.py` 코드를 참고하세요.
+참고 숫자 (그래프가 맞게 나왔는지 확인용, cross Macro-F1):
+xgb 0.667 / tf_plain 0.788 / tf_adv 0.795 / tf_aug 0.847 / tf_aug_adv 0.857
 
-**완료 기준:** 그림 4장을 브랜치 `feat/presentation-figures` 로 PR.
+**완료 기준:** 그림 7장 + `10_figures.py` 를 브랜치 `feat/presentation-figures` 로 PR.
 
 ---
 
