@@ -39,4 +39,8 @@ for st in ("cross", "seen"):
     run("scripts/04_train_nn.py", "--exp", "tf_aug_adv", "--setting", st, "--repeats", "0", "--seeds", "0",
         "--set", *S, *FAST)
 run("scripts/05_summarize.py", "--set", *S)
+FD = ["finedance.root=data/fake_finedance", "finedance.cache=data/cache/fake_finedance.pkl"]
+run("tests/make_fake_finedance.py", "--out", "data/fake_finedance")
+run("scripts/09_external_finedance.py", "--exp", "xgb", "--rebuild", "--set", *S, *FAST, *FD)
+run("scripts/09_external_finedance.py", "--exp", "tf_aug_adv", "--set", *S, *FAST, *FD)
 print("\n스모크 테스트 통과")

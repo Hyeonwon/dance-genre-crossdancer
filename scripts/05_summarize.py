@@ -28,7 +28,7 @@ rows = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))   # ver -> (e
 settings, newest = {}, defaultdict(float)
 for p in sorted(root.glob("*/*.json")):
     r = json.loads(p.read_text(encoding="utf-8"))
-    if "test" not in r:
+    if not r.get("test"):          # 외부 검증 결과(FineDance)는 09 스크립트에서 따로 요약
         continue
     ver = r.get("prep_version", "unknown")
     settings[ver] = r.get("prep_settings", {})

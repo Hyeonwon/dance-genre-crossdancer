@@ -20,11 +20,11 @@ def _gather(feats, cache, names, g2i):
     return np.concatenate(X), np.array(y), seq
 
 
-def run_xgb(cfg, cache, feats, split, seed=0) -> dict:
+def run_xgb(cfg, cache, feats, split, seed=0, external=None) -> dict:
+    """external: (fd_cache, fd_feats, 평가함수). split['test'] 가 비면 AIST++ 테스트는 건너뜀."""
     g2i = genre_index(cache)
     Xtr, ytr, _ = _gather(feats, cache, split["train"], g2i)
     Xva, yva, sva = _gather(feats, cache, split["val"], g2i)
-    Xte, yte, ste = _gather(feats, cache, split["test"], g2i)
     x = cfg["xgb"]
     best = None
     for depth in x["max_depth_grid"]:
@@ -39,10 +39,20 @@ def run_xgb(cfg, cache, feats, split, seed=0) -> dict:
         if best is None or f1 > best[0]:
             best = (f1, depth, clf)
     val_f1, depth, clf = best
-    test = compute_metrics(clf.predict_proba(Xte), yte, ste, cache, g2i)
+    test, n_test = None, 0
+    if split["test"]:
+        Xte, yte, ste = _gather(feats, cache, split["test"], g2i)
+        test, n_test = compute_metrics(clf.predict_proba(Xte), yte, ste, cache, g2i), len(yte)
+    ext = None
+    if external is not None:
+        fd_cache, fd_feats, evaluate = external
+        names = sorted(fd_feats)
+        X = np.concatenate([fd_feats[n] for n in names])
+        seq = [n for n in names for _ in range(len(fd_feats[n]))]
+        ext = evaluate(clf.predict_proba(X), seq, fd_cache, g2i)
     fn = feature_names(keep_joints(cfg["data"]["drop_joint_groups"]))
     imp = clf.feature_importances_
     top = sorted(zip(fn, imp.tolist()), key=lambda t: -t[1])[:20]
     return {"model": "xgb", "best_max_depth": depth, "val_seq_macro_f1": float(val_f1),
-            "best_iteration": int(clf.best_iteration), "test": test, "top_features_gain": top,
-            "n_train_windows": len(ytr), "n_test_windows": len(yte)}
+            "best_iteration": int(clf.best_iteration), "test": test, "external": ext, "top_features_gain": top,
+            "n_train_windows": len(ytr), "n_test_windows": n_test}

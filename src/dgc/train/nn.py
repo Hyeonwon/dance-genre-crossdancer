@@ -84,7 +84,9 @@ def _seq_macro_f1(P, Y, I, ds, g2i):
     return f1_score(y, sp.argmax(1), labels=list(range(len(g2i))), average="macro", zero_division=0)
 
 
-def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
+def run_nn(cfg, cache, split, seed=0, log=print, external=None) -> dict:
+    """external: (fd_cache, 평가함수) — 주면 학습이 끝난 모델로 외부 데이터셋도 평가한다.
+    split["test"] 가 비어 있으면 (전체 AIST++로 학습하는 외부 검증용) AIST++ 테스트는 건너뛴다."""
     set_seed(seed)
     device = pick_device()
     n = cfg["nn"]
@@ -166,8 +168,17 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
     if best_state is not None:
         model.load_state_dict(best_state)
 
-    P, Y, _, I, _ = predict(model, dl_te, device)
-    test = compute_metrics(P, Y, [ds_te.items[i][0] for i in I], cache, g2i)
+    test = None
+    if len(ds_te):
+        P, Y, _, I, _ = predict(model, dl_te, device)
+        test = compute_metrics(P, Y, [ds_te.items[i][0] for i in I], cache, g2i)
+
+    ext = None
+    if external is not None:
+        fd_cache, evaluate = external
+        ds_fd = WindowDataset(fd_cache, sorted(fd_cache["seqs"]), cfg, g2i, {})
+        P, _, _, I, _ = predict(model, DataLoader(ds_fd, **kw), device)
+        ext = evaluate(P, [ds_fd.items[i][0] for i in I], fd_cache, g2i)
 
     # 개인 정보량: 학습 윈도우로 probe 학습 → 검증 윈도우(같은 댄서들의 다른 시퀀스)로 평가
     _, Ytr, Dtr, _, Ztr = predict(model, DataLoader(ds_tr_eval, **kw), device)
@@ -176,5 +187,5 @@ def run_nn(cfg, cache, split, seed=0, log=print) -> dict:
 
     return {"model": cfg.get("exp_name", "nn"), "seed": seed, "device": str(device),
             "best_val_seq_macro_f1": best, "epochs_run": len(history), "test": test,
-            "probe": probe, "history": history,
+            "probe": probe, "external": ext, "history": history,
             "n_train_windows": len(ds_tr), "n_test_windows": len(ds_te)}
