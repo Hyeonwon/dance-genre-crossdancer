@@ -1,24 +1,85 @@
-"""[확장 · 형원 작업] FineDance 외부 검증용 로더.
+"""FineDance 외부 검증용 로더.
 
-목표: FineDance 중 AIST++와 겹치는 장르만 골라, AIST++ 캐시와 같은 형식으로 만든다.
-그러면 학습된 모델을 그대로 불러 테스트만 하면 된다 (학습에는 절대 섞지 않는다).
+FineDance(ICCV 2023)는 AIST++와 다른 댄서·다른 스튜디오·다른 모션캡처 장비로 만든 데이터다.
+AIST++와 겹치는 장르만 골라 AIST++ 캐시와 같은 형식으로 만든다. **학습에는 절대 섞지 않는다.**
 
-해야 할 일
-1. FineDance 장르 목록을 확인하고 AIST++ 10개 장르와의 대응표를 만든다 (GENRE_MAP).
-   애매한 장르는 넣지 않는다. 겹치는 장르 수가 적으면 팀원과 상의해서 범위를 정한다.
-2. FineDance 모션(SMPL-H)을 smplx 로 관절 좌표로 바꾼 뒤 COCO 17관절에 대응시킨다.
-   (SMPL 관절에는 눈·귀가 없으므로 머리 관절은 head 관절 위치로 근사하거나, 머리 그룹을 빼고
-    data.drop_joint_groups=[head] 로 학습한 모델과 비교한다.)
-3. fps 를 30으로 맞추고, 수직축 방향을 AIST++ 와 같게 맞춘다.
-4. build_cache 와 같은 구조의 dict 를 반환한다:
-   {"seqs": {name: {"genre", "dancer", "situation", "joints", "floor"}}, "torso": {dancer: float},
-    "fps": 30, "up_axis": ...}
+변환 과정
+1. motion/*.npy (T, 315) = 골반 위치 3 + SMPL-H 52관절 6D 회전 (30fps, y축 위)
+2. 몸통 22관절만 FK → COCO 17관절 근사 (smpl_fk.py)
+3. AIST++에서 추정한 관절별 보정값 적용 (configs/smpl_calib.json, scripts/08_calibrate_smpl.py)
+4. 댄서 정보가 없으므로 시퀀스마다 자기 몸통 길이로 정규화 (dancer = 시퀀스 이름)
 """
+import json
+import pickle
+from pathlib import Path
 
-GENRE_MAP: dict[str, str] = {
-    # "FineDance 장르 이름": "gXX",   ← 확인 후 채우기
+import numpy as np
+
+from dgc.config import resolve
+from dgc.data.preprocess import floor_height, torso_length
+from dgc.data.smpl_fk import smplh_rot6d_fk, to_coco17
+
+# FineDance 세부 장르(style2, 소문자) → AIST++ 장르 코드. 정답으로 인정하는 코드 목록.
+# Hiphop은 AIST++에서 Middle/LA 두 장르로 나뉘어 있어 둘 다 정답으로 인정한다.
+# 대응이 애매한 장르(Urban, Korean, 중국 고전·민속 등)는 넣지 않는다.
+GENRE_MAP: dict[str, list[str]] = {
+    "breaking": ["gBR"],
+    "popping": ["gPO"],
+    "locking": ["gLO"],
+    "hiphop": ["gMH", "gLH"],
+    "jazz": ["gJS"],          # FineDance의 Street 계열 Jazz → AIST++ Street Jazz
 }
+FD_LABELS = list(GENRE_MAP)
 
 
-def build_finedance_cache(cfg):
-    raise NotImplementedError("확장 작업: 위 설명대로 구현하세요.")
+def find_root(path) -> Path:
+    """압축을 푼 위치에 따라 한 단계 더 안쪽에 폴더가 생기는 경우를 처리."""
+    p = resolve(path)
+    for cand in [p, *p.glob("*")]:
+        if (cand / "motion").is_dir() and (cand / "label_json").is_dir():
+            return cand
+    raise FileNotFoundError(f"{p} 아래에서 motion/ 과 label_json/ 폴더를 찾지 못했습니다.")
+
+
+def build_finedance_cache(cfg) -> dict:
+    fd = cfg["finedance"]
+    root = find_root(fd["root"])
+    calib = np.array(json.loads(resolve(fd["calib"]).read_text(encoding="utf-8"))["calib_m"])
+    up = cfg["data"]["up_axis"]
+    seqs, torso, skipped = {}, {}, {}
+    for jf in sorted((root / "label_json").glob("*.json")):
+        lab = json.loads(jf.read_text(encoding="utf-8"))
+        style = str(lab.get("style2", "")).strip().lower()
+        mf = root / "motion" / f"{jf.stem}.npy"
+        if style not in GENRE_MAP or not mf.exists():
+            skipped[style] = skipped.get(style, 0) + 1
+            continue
+        P, G = smplh_rot6d_fk(np.load(mf))
+        J = to_coco17(P, G, calib)
+        if fd.get("src_fps", 30) != cfg["data"]["fps"]:
+            J = J[:: fd["src_fps"] // cfg["data"]["fps"]]
+        name = f"fd_{jf.stem}"
+        seqs[name] = {"name": name, "genre": GENRE_MAP[style][0], "fd_label": style,
+                      "accept": GENRE_MAP[style], "situation": "fd", "dancer": name,
+                      "song": lab.get("name"), "joints": J, "floor": floor_height(J, up)}
+        torso[name] = torso_length(J)
+    cache = {"seqs": seqs, "torso": torso, "fps": cfg["data"]["fps"], "up_axis": up,
+             "skipped_styles": skipped}
+    out = resolve(fd["cache"])
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "wb") as f:
+        pickle.dump(cache, f)
+    counts = {}
+    for s in seqs.values():
+        counts[s["fd_label"]] = counts.get(s["fd_label"], 0) + 1
+    print(f"FineDance 캐시 저장: {out} ({len(seqs)}개 시퀀스) 장르별 {counts}")
+    print(f"  제외한 장르: {skipped}")
+    return cache
+
+
+def load_finedance_cache(cfg, rebuild=False) -> dict:
+    p = resolve(cfg["finedance"]["cache"])
+    if rebuild or not p.exists():
+        return build_finedance_cache(cfg)
+    with open(p, "rb") as f:
+        return pickle.load(f)
