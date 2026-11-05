@@ -97,6 +97,38 @@ def load_cache(cfg) -> dict:
     return cache
 
 
+def gaussian_smooth(X: np.ndarray, sigma: float) -> np.ndarray:
+    """시간축(0번 축) 가우시안 평활화. 끝은 첫/마지막 값으로 채운다 (scipy 없이)."""
+    if not sigma or sigma <= 0:
+        return X
+    r = int(np.ceil(3 * sigma))
+    k = np.exp(-0.5 * (np.arange(-r, r + 1) / sigma) ** 2)
+    k /= k.sum()
+    Xp = np.concatenate([np.repeat(X[:1], r, 0), X, np.repeat(X[-1:], r, 0)])
+    out = np.zeros_like(X, dtype=np.float64)
+    for i, w in enumerate(k):
+        out += w * Xp[i:i + len(X)]
+    return out.astype(X.dtype)
+
+
+def smooth_cache(cache: dict, sigma: float) -> dict:
+    """캐시의 모든 시퀀스를 평활화한 복사본 (바닥 높이·몸통 길이도 다시 계산).
+    AIST++ keypoints3d(여러 카메라 2D 검출을 삼각측량)는 떨림이 있어 속도·가속도가 부풀려져 있다.
+    FineDance(모션캡처 기반 SMPL)와 비교할 때 이 측정 잡음 차이를 없애기 위해 쓴다."""
+    if not sigma or sigma <= 0:
+        return cache
+    up = cache["up_axis"]
+    seqs = {}
+    for n, s in cache["seqs"].items():
+        J = gaussian_smooth(s["joints"], sigma)
+        seqs[n] = {**s, "joints": J, "floor": floor_height(J, up)}
+    per = defaultdict(list)
+    for s in seqs.values():
+        per[s["dancer"]].append(torso_length(s["joints"]))
+    return {**cache, "seqs": seqs, "torso": {k: float(np.mean(v)) for k, v in per.items()},
+            "smooth_sigma": sigma}
+
+
 def window_starts(T: int, L: int, stride: int) -> list[int]:
     if T < L:
         return []

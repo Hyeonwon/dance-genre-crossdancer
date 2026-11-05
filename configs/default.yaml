@@ -72,4 +72,7 @@ finedance:                     # 외부 검증 (scripts/09_external_finedance.py
   root: data/finedance         # motion/ 과 label_json/ 이 있는 폴더 (한 단계 안쪽이어도 찾아감)
   cache: data/cache/finedance_30fps.pkl
   calib: configs/smpl_calib.json   # scripts/08_calibrate_smpl.py 결과
-  src_fps: 30  # 개인 정보량 측정용 선형 분류기 학습 윈도우 수 (장르당)
+  src_fps: 30
+  smooth_sigma: 2.0            # 외부 검증 때 AIST++·FineDance 둘 다 시간축 평활화 (프레임 단위).
+                               # AIST++ 좌표의 측정 떨림이 FineDance보다 커서 속도·가속도 분포가 다르기 때문.
+                               # 0 이면 끔 (비교 실험: --set finedance.smooth_sigma=0 --tag raw)  # 개인 정보량 측정용 선형 분류기 학습 윈도우 수 (장르당)

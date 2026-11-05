@@ -19,7 +19,7 @@ import numpy as np
 
 from dgc.config import load_config, resolve
 from dgc.data.finedance import FD_LABELS, load_finedance_cache
-from dgc.data.preprocess import load_cache
+from dgc.data.preprocess import load_cache, smooth_cache
 from dgc.data.splits import _split_val
 from dgc.data.windows import handcrafted_for_all
 from dgc.eval.external import evaluate_external
@@ -78,8 +78,10 @@ if args.summary or not args.exp:
 cfg = load_config(None if is_xgb else args.exp, args.set)
 exp = args.exp + (f"_{args.tag}" if args.tag else "")
 cfg["exp_name"] = exp
-cache = load_cache(cfg)
-fd = load_finedance_cache(cfg, rebuild=args.rebuild)
+sigma = cfg["finedance"].get("smooth_sigma", 0)
+cache = smooth_cache(load_cache(cfg), sigma)
+fd = smooth_cache(load_finedance_cache(cfg, rebuild=args.rebuild), sigma)
+print(f"시간축 평활화 sigma={sigma} 프레임 (AIST++·FineDance 둘 다)")
 
 # AIST++ 전체 시퀀스로 학습 (검증용 일부만 떼어 둠). 테스트는 FineDance만.
 seqs = cache["seqs"]
