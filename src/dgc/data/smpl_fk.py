@@ -49,6 +49,8 @@ FACE_OFFSETS = np.array([
 ])
 # COCO 5~16 ← SMPL 관절 번호
 COCO_FROM_SMPL = [16, 17, 18, 19, 20, 21, 1, 2, 4, 5, 7, 8]
+# COCO 관절마다 '붙어 움직이는' SMPL 관절 (보정값을 이 관절의 좌표계로 표현). 엉덩이 점은 골반에 붙인다.
+ATTACH = [HEAD] * 5 + [16, 17, 18, 19, 20, 21, 0, 0, 4, 5, 7, 8]
 
 
 def axis_angle_to_matrix(aa: np.ndarray) -> np.ndarray:
@@ -73,9 +75,9 @@ def rot6d_to_matrix(d6: np.ndarray) -> np.ndarray:
     return np.stack([b1, b2, b3], axis=-2)
 
 
-def forward_kinematics(R: np.ndarray, trans: np.ndarray) -> np.ndarray:
-    """R: (T, 22, 3, 3) 관절별 지역 회전, trans: (T, 3) 골반 위치 → (T, 22, 3) 관절 좌표,
-    그리고 머리의 전역 회전 (T, 3, 3)."""
+def forward_kinematics(R: np.ndarray, trans: np.ndarray):
+    """R: (T, 22, 3, 3) 관절별 지역 회전, trans: (T, 3) 골반 위치
+    → 관절 좌표 (T, 22, 3), 관절별 전역 회전 (T, 22, 3, 3)."""
     T = R.shape[0]
     G = np.zeros((T, 22, 3, 3))
     P = np.zeros((T, 22, 3))
@@ -85,23 +87,28 @@ def forward_kinematics(R: np.ndarray, trans: np.ndarray) -> np.ndarray:
         else:
             G[:, j] = G[:, p] @ R[:, j]
             P[:, j] = P[:, p] + (G[:, p] @ OFFSETS[j])
-    return P, G[:, HEAD]
+    return P, G
 
 
-def to_coco17(P: np.ndarray, G_head: np.ndarray) -> np.ndarray:
-    """SMPL 22관절 좌표 → COCO 17관절 (T, 17, 3)."""
-    face = P[:, HEAD, None, :] + np.einsum("tij,kj->tki", G_head, FACE_OFFSETS)
-    return np.concatenate([face, P[:, COCO_FROM_SMPL]], axis=1).astype(np.float32)
+def to_coco17(P: np.ndarray, G: np.ndarray, calib=None) -> np.ndarray:
+    """SMPL 22관절 좌표 → COCO 17관절 (T, 17, 3).
+    calib: (17, 3) 관절별 보정 벡터 (붙은 관절 좌표계, m). AIST++의 실제 COCO 좌표와 짝지어 추정한 값
+    (scripts/08_calibrate_smpl.py). SMPL 관절(뼈 회전 중심)과 COCO 점(몸 표면)의 정의 차이를 메운다."""
+    face = P[:, HEAD, None, :] + np.einsum("tij,kj->tki", G[:, HEAD], FACE_OFFSETS)
+    J = np.concatenate([face, P[:, COCO_FROM_SMPL]], axis=1)
+    if calib is not None:
+        J = J + np.einsum("tkij,kj->tki", G[:, ATTACH], np.asarray(calib))
+    return J.astype(np.float32)
 
 
-def smpl_axis_angle_to_coco(poses: np.ndarray, trans: np.ndarray) -> np.ndarray:
-    """AIST++ motions: poses (T, 72) 축-각, trans (T, 3) m 단위 → (T, 17, 3)."""
+def smpl_axis_angle_fk(poses: np.ndarray, trans: np.ndarray):
+    """AIST++ motions: poses (T, 72) 축-각, trans (T, 3) m 단위 → FK 결과 (P, G)."""
     R = axis_angle_to_matrix(poses.reshape(-1, 24, 3)[:, :22].astype(np.float64))
-    return to_coco17(*forward_kinematics(R, trans.astype(np.float64)))
+    return forward_kinematics(R, trans.astype(np.float64))
 
 
-def smplh_rot6d_to_coco(motion: np.ndarray) -> np.ndarray:
-    """FineDance motion: (T, 315) = 골반 위치 3 + 52관절 × 6D → (T, 17, 3)."""
+def smplh_rot6d_fk(motion: np.ndarray):
+    """FineDance motion: (T, 315) = 골반 위치 3 + 52관절 × 6D → FK 결과 (P, G)."""
     trans = motion[:, :3].astype(np.float64)
     R = rot6d_to_matrix(motion[:, 3:].reshape(-1, 52, 6)[:, :22].astype(np.float64))
-    return to_coco17(*forward_kinematics(R, trans))
+    return forward_kinematics(R, trans)
