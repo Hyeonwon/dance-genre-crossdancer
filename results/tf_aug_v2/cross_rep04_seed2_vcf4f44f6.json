@@ -1,0 +1,392 @@
+{
+ "model": "tf_aug_v2",
+ "seed": 2,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 1.0,
+ "epochs_run": 21,
+ "test": {
+  "window_acc": 0.7849677562819658,
+  "window_macro_f1": 0.7812639849470735,
+  "seq_acc": 0.8942731277533039,
+  "seq_macro_f1": 0.892315229325247,
+  "per_genre_f1": {
+   "gBR": 0.9647058823529412,
+   "gPO": 0.94,
+   "gLO": 0.9090909090909091,
+   "gWA": 0.9438202247191011,
+   "gMH": 0.7,
+   "gLH": 0.7956989247311828,
+   "gHO": 0.9019607843137255,
+   "gKR": 0.9108910891089109,
+   "gJS": 0.9545454545454546,
+   "gJB": 0.9024390243902439
+  },
+  "confusion": [
+   [
+    41,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0
+   ],
+   [
+    0,
+    47,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    2,
+    40,
+    0,
+    2,
+    2,
+    0,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    42,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    0,
+    0,
+    28,
+    6,
+    7,
+    4,
+    0,
+    0
+   ],
+   [
+    0,
+    3,
+    1,
+    0,
+    3,
+    37,
+    2,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    46,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    46,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    42,
+    4
+   ],
+   [
+    0,
+    0,
+    0,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    37
+   ]
+  ],
+  "n_test_seqs": 454,
+  "seq_macro_f1_by_situation": {
+   "sBM": 0.8785249458056109,
+   "sFM": 0.9698834498834499
+  }
+ },
+ "probe": {
+  "probe_acc": 0.8549208240446816,
+  "probe_chance": 0.5,
+  "per_genre": {
+   "0": 0.7391304347826086,
+   "1": 0.9523809523809523,
+   "2": 0.8343558282208589,
+   "3": 0.7142857142857143,
+   "4": 0.7717391304347826,
+   "5": 0.7952380952380952,
+   "6": 0.9809523809523809,
+   "7": 0.9879518072289156,
+   "8": 0.8306451612903226,
+   "9": 0.9425287356321839
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 0.9755653806354688,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.921581098339719
+  },
+  {
+   "epoch": 1,
+   "loss": 0.43255863967149155,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.8802916116141922
+  },
+  {
+   "epoch": 2,
+   "loss": 0.30331907453744306,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9552702110483221
+  },
+  {
+   "epoch": 3,
+   "loss": 0.22650034563696902,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9854406130268201
+  },
+  {
+   "epoch": 4,
+   "loss": 0.19426419252286786,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9645675948901756
+  },
+  {
+   "epoch": 5,
+   "loss": 0.1896607219848944,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856960408684546
+  },
+  {
+   "epoch": 6,
+   "loss": 0.14632577848337266,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9785185185185187
+  },
+  {
+   "epoch": 7,
+   "loss": 0.140180938464144,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9853997445721582
+  },
+  {
+   "epoch": 8,
+   "loss": 0.12552542645970116,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856410256410257
+  },
+  {
+   "epoch": 9,
+   "loss": 0.12376816910084175,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9708517536103745
+  },
+  {
+   "epoch": 10,
+   "loss": 0.11512383548137935,
+   "adv_loss": null,
+   "val_seq_macro_f1": 1.0
+  },
+  {
+   "epoch": 11,
+   "loss": 0.09168497315486489,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9853997445721582
+  },
+  {
+   "epoch": 12,
+   "loss": 0.08685530068595772,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9701812555260831
+  },
+  {
+   "epoch": 13,
+   "loss": 0.09887149808928371,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 14,
+   "loss": 0.08359521222098366,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9857051632913703
+  },
+  {
+   "epoch": 15,
+   "loss": 0.08335239773454226,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 16,
+   "loss": 0.07414705606136957,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9853997445721582
+  },
+  {
+   "epoch": 17,
+   "loss": 0.07595280567589013,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9779628647214853
+  },
+  {
+   "epoch": 18,
+   "loss": 0.08485919415302899,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9854406130268201
+  },
+  {
+   "epoch": 19,
+   "loss": 0.06602042846219695,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9854111405835544
+  },
+  {
+   "epoch": 20,
+   "loss": 0.07344637815334389,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856960408684546
+  }
+ ],
+ "n_train_windows": 7391,
+ "n_test_windows": 4497,
+ "exp": "tf_aug_v2",
+ "setting": "cross",
+ "repeat": 4,
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": true,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": false,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "exp_name": "tf_aug_v2"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}

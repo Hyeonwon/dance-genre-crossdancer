@@ -1,0 +1,374 @@
+{
+ "model": "tf_aug_v2",
+ "seed": 1,
+ "device": "cuda",
+ "best_val_seq_macro_f1": 0.9928480204342274,
+ "epochs_run": 18,
+ "test": {
+  "window_acc": 0.8032021347565044,
+  "window_macro_f1": 0.8049241254818547,
+  "seq_acc": 0.9140969162995595,
+  "seq_macro_f1": 0.91653496929031,
+  "per_genre_f1": {
+   "gBR": 0.963855421686747,
+   "gPO": 0.989247311827957,
+   "gLO": 0.9438202247191011,
+   "gWA": 0.963855421686747,
+   "gMH": 0.7578947368421053,
+   "gLH": 0.8172043010752689,
+   "gHO": 0.8888888888888888,
+   "gKR": 0.9052631578947369,
+   "gJS": 0.9473684210526315,
+   "gJB": 0.9879518072289156
+  },
+  "confusion": [
+   [
+    40,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    0,
+    0
+   ],
+   [
+    0,
+    46,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    42,
+    0,
+    3,
+    0,
+    1,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    40,
+    0,
+    0,
+    0,
+    0,
+    3,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    36,
+    6,
+    4,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    5,
+    38,
+    4,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    44,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    2,
+    1,
+    0,
+    43,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    45,
+    1
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    41
+   ]
+  ],
+  "n_test_seqs": 454,
+  "seq_macro_f1_by_situation": {
+   "sBM": 0.9051860632190685,
+   "sFM": 0.9842424242424241
+  }
+ },
+ "probe": {
+  "probe_acc": 0.8512740645564406,
+  "probe_chance": 0.5,
+  "per_genre": {
+   "0": 0.8260869565217391,
+   "1": 0.9583333333333334,
+   "2": 0.7852760736196319,
+   "3": 0.7763975155279503,
+   "4": 0.7282608695652174,
+   "5": 0.7380952380952381,
+   "6": 0.9428571428571428,
+   "7": 0.9036144578313253,
+   "8": 0.9112903225806451,
+   "9": 0.9425287356321839
+  }
+ },
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 1.0261068048684494,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.8852818012128356
+  },
+  {
+   "epoch": 1,
+   "loss": 0.4341654384913652,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9636975004561211
+  },
+  {
+   "epoch": 2,
+   "loss": 0.29526338674451996,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9630640394088671
+  },
+  {
+   "epoch": 3,
+   "loss": 0.24096638450156088,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9631685683409822
+  },
+  {
+   "epoch": 4,
+   "loss": 0.20111080255845318,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9714782933870808
+  },
+  {
+   "epoch": 5,
+   "loss": 0.17700707326116769,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9853997445721582
+  },
+  {
+   "epoch": 6,
+   "loss": 0.17281025644877682,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9785531837255975
+  },
+  {
+   "epoch": 7,
+   "loss": 0.13591715152496878,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 8,
+   "loss": 0.13729092263333176,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 9,
+   "loss": 0.11541423175645911,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9639182630906771
+  },
+  {
+   "epoch": 10,
+   "loss": 0.10728876712205618,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9781927497789568
+  },
+  {
+   "epoch": 11,
+   "loss": 0.10094256277965463,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9925925925925927
+  },
+  {
+   "epoch": 12,
+   "loss": 0.1057880608121986,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9707853423715493
+  },
+  {
+   "epoch": 13,
+   "loss": 0.09586373772472143,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9854406130268201
+  },
+  {
+   "epoch": 14,
+   "loss": 0.08613848462295921,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9928480204342274
+  },
+  {
+   "epoch": 15,
+   "loss": 0.08938194105158681,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856960408684546
+  },
+  {
+   "epoch": 16,
+   "loss": 0.08783467695643396,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9777165593027662
+  },
+  {
+   "epoch": 17,
+   "loss": 0.06044943331052428,
+   "adv_loss": null,
+   "val_seq_macro_f1": 0.9856960408684546
+  }
+ ],
+ "n_train_windows": 7391,
+ "n_test_windows": 4497,
+ "exp": "tf_aug_v2",
+ "setting": "cross",
+ "repeat": 4,
+ "config": {
+  "paths": {
+   "anno_dir": "data/aist_plusplus_final",
+   "cache": "data/cache/aist_30fps.pkl",
+   "splits_dir": "data/splits",
+   "results_dir": "results"
+  },
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0,
+   "drop_joint_groups": []
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  },
+  "xgb": {
+   "max_depth_grid": [
+    3,
+    5,
+    7
+   ],
+   "n_estimators": 500,
+   "learning_rate": 0.1,
+   "early_stopping_rounds": 30,
+   "n_jobs": -1
+  },
+  "nn": {
+   "backbone": "transformer",
+   "d_model": 128,
+   "n_layers": 4,
+   "n_heads": 4,
+   "ff_dim": 256,
+   "dropout": 0.1,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch_size": 64,
+   "max_epochs": 40,
+   "patience": 10,
+   "selection": "best_val",
+   "grad_clip": 1.0,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "num_workers": 0,
+   "stats_windows": 3000
+  },
+  "aug": {
+   "enabled": true,
+   "mirror": true,
+   "bone_scale": 0.15,
+   "time_scale": 0.1
+  },
+  "adv": {
+   "enabled": false,
+   "weight": 1.0,
+   "gamma": 10.0,
+   "hidden": 128,
+   "lr_mult": 10.0,
+   "lambda_max": 0.5
+  },
+  "probe": {
+   "max_windows_per_genre": 2000
+  },
+  "exp_name": "tf_aug_v2"
+ },
+ "prep_version": "cf4f44f6",
+ "prep_settings": {
+  "data": {
+   "keypoints_key": "keypoints3d",
+   "src_fps": 60,
+   "fps": 30,
+   "up_axis": 1,
+   "up_sign": 1,
+   "window_sec": 4.0,
+   "stride_sec": 1.0
+  },
+  "split": {
+   "n_repeats": 10,
+   "val_frac": 0.15,
+   "seed": 0
+  }
+ }
+}
